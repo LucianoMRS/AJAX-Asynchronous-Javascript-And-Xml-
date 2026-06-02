@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 3</title>
+</head>
+<body>
+    <button id="btnCarregar">Carregar Dados (Promise)</button>
+    <div id="resultado"></div>
+
+    <script>
+        // Criamos uma função que retorna uma Promise que controla o XHR
+        function fazerRequisicaoAssincrona(url) {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(xhr.responseText); // Sucesso!
+                    } else {
+                        reject(new Error(xhr.statusText)); // Erro de servidor!
+                    }
+                };
+                
+                xhr.onerror = () => reject(new Error('Erro de conexão')); // Erro de rede!
+                xhr.send();
+            });
+        }
+
+        document.getElementById('btnCarregar').addEventListener('click', () => {
+            fazerRequisicaoAssincrona('https://api.exemplo.com/dados')
+                .then(dados => document.getElementById('resultado').innerHTML = dados)
+                .catch(erro => console.error('Erro:', erro));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 1</title>
+</head>
+<body>
+    <script>
+        // Exemplo clássico de como o ajax3.html original provavelmente é estruturado:
+     const xhr = new XMLHttpRequest();
+     xhr.open('GET', 'https://api.exemplo.com/dados', true);
+
+     xhr.onreadystatechange = function() {
+         if (xhr.readyState === 4 && xhr.status === 200) {
+             document.getElementById('resultado').innerHTML = xhr.responseText;
+         }
+     };
+
+     xhr.send();
+    </script>
+</body>
+</html>

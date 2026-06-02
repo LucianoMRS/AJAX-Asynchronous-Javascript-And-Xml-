@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 2</title>
+</head>
+<body>
+    <button id="btnCarregar">Carregar Dados (Fetch)</button>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('btnCarregar').addEventListener('click', () => {
+            // 1. Fazemos a requisição
+            fetch('https://api.exemplo.com/dados')
+                // 2. Lidamos com a resposta (convertendo para texto ou JSON)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na requisição: ' + response.status);
+                    }
+                    return response.text(); 
+                })
+                // 3. Pegamos os dados e colocamos na tela
+                .then(dados => {
+                    document.getElementById('resultado').innerHTML = dados;
+                })
+                // 4. Lidamos com qualquer erro no caminho
+                .catch(erro => {
+                    console.error('Falha ao buscar os dados:', erro);
+                });
+        });
+    </script>
+</body>
+</html>
